@@ -11,9 +11,17 @@
 
 'use strict';
 
-require('art/modes/current').setCurrent(
-  require('art/modes/fast-noSideEffects') // Flip this to DOM mode for debugging
-);
+// if in node js environment use svg
+
+if ( require('./isNode')()) {
+  require('art/modes/current').setCurrent(
+    require('art/modes/svg') // Flip this to DOM mode for debugging
+  );
+} else {
+  require('art/modes/current').setCurrent(
+    require('art/modes/fast-noSideEffects') // Flip this to DOM mode for debugging
+  );
+}
 
 const Transform = require('art/core/transform');
 const Mode = require('art/modes/current');
